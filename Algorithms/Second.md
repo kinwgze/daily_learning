@@ -20,31 +20,9 @@ Collections.sort()来实现排序。作者也在书中说明了，比如希尔�
 快速的过了一遍，主要是通过优先队列引出了堆、堆的建立、排队、带有优先级的堆等。Java中有小根堆和大根堆，
 很多时候可以直接拿来用。后面再过一遍底层原理吧。
 
-##2.6 应用
+##2.5 应用
 这一章也没有什么实质性的内容。只是简单的说了一下排序的应用、稳定性、Java中的sort函数等。
 
-
-Java Concurrency in Practice
-
-这是一本需要长期看的书。现在第一遍只是做简单了解。看不懂的不做纠结。
-
-# 预备知识--juc视频
-
-## 01. juc是什么
-
-java api的三个包
-java.util.comcurrent
-java.util.concurrent.atomic
-java.util.concurrent.locks
-
-进程、线程的基础。
-线程状态：
-  new（新建）
-  Runnable（准备就绪）
-  Blocked（阻塞）
-  Waiting（**不见不散**）
-  Timed_Waiting（**过时不候**）
-  Terminated（终结）
 
 
 
