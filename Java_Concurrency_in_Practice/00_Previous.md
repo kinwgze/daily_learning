@@ -61,8 +61,29 @@ Lambda表达式-----拷贝小括号，写死右箭头，落地大括号
 
 ## 04. 生产者消费者
 
-编程模板中：判断、干活、通知。
+多线程编程模板中：判断、干活、通知。
 
+## 05. 线程间通信（上）
+
+多线程编程模板下：注意线程间的虚假唤醒。`wait()`调用之前，需要while循环判断。严禁使用if判断。
+
+## 06. 线程间通信（下）
+
+Lock使用的是`await()`、`signal()`，使用condition（lock的钥匙）。
+
+```java
+private Lock lock = new ReentrantLock();
+private Condition cd = lock.newCondition();
+
+// 使用
+lock.lock();
+
+  cd.await()
+
+  cd.signal();
+
+lock.unlock();
+```
 
 
 
