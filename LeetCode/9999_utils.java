@@ -26,8 +26,8 @@ public class ForGitHub {
         Date now = new Date();
         SimpleDateFormat  time = new SimpleDateFormat("yyyy/MM/dd");
         String titleTime = time.format(now);
-        String[] strs = s.split(" ");
-        System.out.println("commit信息：" + titleTime + " " + strs[strs.length - 1] + "\n ");
+        String[] strs2 = s.split("\\.");
+        System.out.println("commit信息：" + titleTime + " " + strs2[0] + "." + strs[strs.length - 1] + "\n ");
 
     }
 }
