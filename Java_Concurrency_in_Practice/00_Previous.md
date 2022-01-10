@@ -92,6 +92,29 @@ lock可以有多个condition（一把钥匙，可以有好几把锁）
 定制化通信的前提是，明确知道有哪几个线程，什么条件启用新线程。
 
 
+## 08.线程不安全上 && 09.线程不安全下
+
+`Collections.synchronizedList()` 
+
+`Collections.synchronizedMap()`
+
+……
+
+// Collections虽然可以用，但是效率低
+
+解决方案：写时复制
+
+`Class CopyOnWriteArrayList<E>`   JUC
+
+`List<String> list = new CopyOnWriteArrayList();` // 效率较高
+
+Map的线程安全类也在JUC中。`ConcurrentHashMap()`
+
+
+
+
+
+
 
 
 
