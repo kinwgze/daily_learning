@@ -120,11 +120,120 @@ Map的线程安全类也在JUC中。`ConcurrentHashMap()`
 
 对于同步方法块，锁是synchronized括号里配置的对象。括号外的锁不住。
 
+## 12.Callable接口上&下
+
+##### 获得多线程的方法有几种：
+
+继承Thread类，Runnable接口、Callable接口、java线程池。
+
+##### Runnable接口和Callable接口的区别。
+
+Callable接口带有返回值，可以抛异常，实现方法为`call()`;
+Runnable接口无返回值，不可以抛异常，实现方法为`run()`;
+
+两者都可以使用Lambda表达式。
+
+#### Callable接口使用示例
+```java
+public class CallableTest {
+    public static void main(String[] args) {
 
 
+        // 创建输入和输出List
+        List<Integer> list = Arrays.asList(1, 2, 3);
+        List<Integer> res = new  CopyOnWriteArrayList<>();
 
+        // 对于需要处理的list，遍历list开启线程处理
+        for (Integer num : list) {
+            // 使用futureTask的方法
+            // 实例化任务，传递参数
+            MyTask myTask = new MyTask(num);
+            // 把任务放进FutureTask中
+            FutureTask<Integer> futureTask = new FutureTask<>(myTask);
+            // 开启线程处理
+            new Thread(futureTask).start();
+            // 获取处理结果
+            Integer result = 0;
+            try {
+                result = futureTask.get();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            } catch (ExecutionException e) {
+                e.printStackTrace();
+            }
+            // 处理结果
+            res.add(result);
+        }
+        System.out.println("result " + res);
 
+    }
+}
 
+class MyTask implements Callable<Integer> {
+
+    private Integer num;
+
+    // 构造函数，用来向task中传递任务的参数
+    public MyTask(Integer num) {
+        this.num = num;
+    }
+
+    // 任务处理方法，需要做什么
+    @Override
+    public Integer call() throws Exception {
+        System.out.println(num);
+        return num * 10;
+    }
+}
+```
+
+#### 对比CompletableFuture
+```java
+public class CallableTest {
+
+    // 任务处理方法
+    public static Integer MyTask2(Integer num) {
+        return num * 10;
+    }
+
+    public static void main(String[] args) {
+
+        // 创建输入和输出List
+        List<Integer> list = Arrays.asList(1, 2, 3);
+        List<Integer> res = new  CopyOnWriteArrayList<>();
+
+        // 使用CompletableFuture，完整版
+        List<CompletableFuture<Void>> futures = list.stream().map(num ->
+                CompletableFuture.supplyAsync(() -> MyTask2(num))
+                .thenAccept(result -> res.add(result)))
+                .collect(Collectors.toList());
+        CompletableFuture.allOf(futures.toArray(new CompletableFuture[futures.size()])).join();
+
+        System.out.println(res);
+
+        // 使用CompletableFuture，简化版，可以用idea的提示自动简化
+        CompletableFuture.allOf(list.stream().map(num ->
+                CompletableFuture.supplyAsync(() -> MyTask2(num))
+                        .thenAccept(res::add)).toArray(CompletableFuture[]::new)).join();
+
+        System.out.println(res);
+
+        // 使用CompletableFuture，完整版，带异常处理
+        CompletableFuture.allOf(list.stream().map(num ->
+                CompletableFuture.supplyAsync(() -> MyTask2(num))
+                        .exceptionally(e -> {
+                            e.printStackTrace();
+                            return 0;
+                        })
+                        .thenAccept(res::add)).toArray(CompletableFuture[]::new)).join();
+        System.out.println(res);
+
+    }
+
+}
+```
+
+**对比之下，CompletableFuture代码更简洁。但是FutureTask的思路更为清晰。**
 
 
 
