@@ -236,5 +236,27 @@ public class CallableTest {
 **对比之下，CompletableFuture代码更简洁。但是FutureTask的思路更为清晰。**
 
 
+## 14.工具类CountDownLatch 上 && 下
+
+减少计数————秦灭六国一统天下
+
+```java
+CountDownLatch cd = new CountDownLatch(5);
+
+cd.countDown();
+
+cd.await;
+```
+
+## 16.工具类CyclicBarrier
+
+循环栅栏————集齐七颗龙珠召唤神龙
+
+## 17.工具类 信号灯Semaphone
+
+三个停车位，停六辆汽车。
+资源争抢。
+
+
 
 
