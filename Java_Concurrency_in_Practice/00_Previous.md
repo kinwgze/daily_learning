@@ -271,6 +271,25 @@ cd.await;
 
 #### ReentrantReadWriteLock 读写锁
 
+## 19.阻塞队列
+
+BlockingQueue 
+
+在多线程领域：所谓阻塞，在某些情况下回**挂起**线程（即阻塞），一旦条件满足，被挂起的线程又会自动**被唤起**。
+
+ArrayBlockingQueue：数组组成的有界阻塞队列
+
+LinkedBlockingQueue：链表结构组成的有界（大小值默认为Integer.MAX_VALUE）阻塞队列。
+
+SynchronousQueue：不存储元素的阻塞队列，即单个元素的队列。
+
+
+
+
+
+
+
+ 
 
 
 
