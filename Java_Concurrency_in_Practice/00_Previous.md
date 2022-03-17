@@ -283,8 +283,17 @@ LinkedBlockingQueue：链表结构组成的有界（大小值默认为Integer.MA
 
 SynchronousQueue：不存储元素的阻塞队列，即单个元素的队列。
 
+## 20.线程池简介
 
+ThreadPoolExecutor
 
+## 21.线程池底层原理
+
+ThreadPoolExecutor 一共七个参数
+
+**如果队列满了，且正在运行的线程数量还小于maximumPoolSize，那么创建的非核心线程立刻执行这个任务！！而不是处理阻塞队列里面的任务**。
+
+**线程池绝对不允许使用Excutors去创建，而是通过ThreadPoolExecutor的方式，这样可以更加明确线程池的运行规则，避免资源耗尽的风险**。
 
 
 
