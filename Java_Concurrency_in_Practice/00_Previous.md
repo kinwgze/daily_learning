@@ -295,8 +295,53 @@ ThreadPoolExecutor 一共七个参数
 
 **线程池绝对不允许使用Excutors去创建，而是通过ThreadPoolExecutor的方式，这样可以更加明确线程池的运行规则，避免资源耗尽的风险**。
 
+## 22.线程池拒绝策略、手写线程池
 
+4个拒绝策略。
 
+## 23.java8特性2
+
+### 函数式接口
+
+java.util.function.*
+
+四大函数式接口
+
+消费型
+```java
+// void accept(T t); 消费型 有参数 无返回值
+Consumer<String> consumer = t -> {
+    System.out.println(t);
+};
+consumer.accept("hello");
+```
+
+供给型
+```java
+// Supplier; T get(); 供给型 无参数 有返回值
+Supplier<String> supplier = () -> {
+    return "hello";
+};
+System.out.println(supplier.get());
+```
+
+函数型
+```java
+// Function; R apply(T t); 函数型 有参数 有返回值
+Function<Integer, String> function = t -> {
+    return t + " toString";
+};
+System.out.println(function.apply(1));
+```
+
+断定型
+```java
+// Predicate; boolean test(T t); 断定型 有参数 返回值是Boolean类型
+Predicate<String> predicate = t -> {
+    return "hello".equalsIgnoreCase(t);
+};
+System.out.println(predicate.test("HELLO"));
+```
 
  
 
