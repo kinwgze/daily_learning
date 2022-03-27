@@ -1,4 +1,4 @@
-# daily_study
+# daily_learning
 
 开个新坑，目标是每天学一点，就一点~
 
